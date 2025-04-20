@@ -15,21 +15,21 @@ class _SplashScreenState extends State<SplashScreen> {
   // List of splash contents
   final List<Map<String, dynamic>> _splashData = [
     {
-      'title': 'Jurusan Administrasi Bisnis Terapan',
-      'description': 'Program studi unggulan di Politeknik Negeri Semarang (Polines) yang memfokuskan pada pendidikan vokasi di bidang administrasi dan bisnis.',
+      'title': 'Lulusan Berkualitas',
+      'description': 'Menghasilkan lulusan yang siap kerja dengan kompetensi unggul di bidangnya.',
       'image': 'assets/images/splash_design1.png',
       'buttonText': 'Lanjutkan'
     },
     {
-      'title': 'Lulusan Berkualitas',
-      'description': 'Menghasilkan lulusan yang siap kerja dengan kompetensi unggul di bidang administrasi bisnis, manajemen, dan keuangan.',
+      'title': 'Jurusan Unggulan',
+      'description': 'Memiliki 4 jurusan unggulan, yaitu Administrasi Bisnis Terapan, Akutansi, Teknik Elektro, dan Teknik Sipil.',
       'image': 'assets/images/splash_design2.png',
       'buttonText': 'Lanjutkan'
     },
     {
-      'title': 'Fasilitas Terbaik',
-      'description': 'Dilengkapi dengan laboratorium praktikum modern, studi bisnis, dan kerjasama dengan berbagai industri untuk pengembangan karir mahasiswa.',
-      'image': 'assets/images/splash_design1.png',
+      'title': 'Fasilitas dan Koneksi',
+      'description': 'Dilengkapi dengan lab praktikum modern, studi bisnis, dan kerjasama dengan berbagai industri untuk pengembangan karir mahasiswa.',
+      'image': 'assets/images/splash_design3.png',
       'buttonText': 'Buka Aplikasi'
     },
   ];
@@ -44,39 +44,70 @@ class _SplashScreenState extends State<SplashScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Stack(
                   children: [
-                    // Image
-                    Image.asset(
-                      _splashData[_currentSplashIndex]['image'],
-                      width: 240,
-                      height: 240,
-                      fit: BoxFit.contain,
-                    ),
-                    const SizedBox(height: 32),
-                    
-                    // Title
-                    Text(
-                      _splashData[_currentSplashIndex]['title'],
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                    // Back button (show only when not on first page)
+                    if (_currentSplashIndex > 0)
+                      Positioned(
+                        top: 16.0,
+                        left: 0.0,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _currentSplashIndex--;
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
                     
-                    // Description
-                    Text(
-                      _splashData[_currentSplashIndex]['description'],
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white70,
-                      ),
-                      textAlign: TextAlign.center,
+                    // Main content centered
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Image
+                        Image.asset(
+                          _splashData[_currentSplashIndex]['image'],
+                          width: 240,
+                          height: 240,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(height: 32),
+                        
+                        // Title
+                        Text(
+                          _splashData[_currentSplashIndex]['title'],
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        
+                        // Description
+                        Text(
+                          _splashData[_currentSplashIndex]['description'],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white70,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ],
                 ),
