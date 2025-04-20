@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer' as developer;
 
 import 'package:polines_app/features/tentang-jurusan/data/models/tentangjurusan_model.dart';
@@ -14,11 +13,9 @@ class TentangJurusanRepositoryImpl implements TentangJurusanRepository {
       // Simulate network request with a delay
       await Future.delayed(const Duration(milliseconds: 500));
       
-      // For now, return mock data
-      // In a real app, this would come from an API or local database
-      final String jsonString = '''
-      {
-        "tentang": "Lembaga Pendidikan ini didirikan atas dasar langkanya tenaga teknisi ahli madya yang diperlukan oleh industri dan keberhasilan Politeknik mekanik Swiss dan ITB. Politeknik Negeri Semarang merupakan Pendidikan Profesional dalam sejumlah bidang pengetahuan khusus. Politeknik Negeri Semarang yang disingkat dengan Polines merupakan Perguruan Tinggi di lingkungan Kementerian Riset, Teknologi dan Pendidikan Tinggi yang dipimpin oleh seorang Direktur yang berada di bawah dan bertanggungjawab kepada Menteri Riset, Teknologi dan Pendidikan Tinggi melalui rektor Universitas Diponegoro. Polines beralamat di Jalan Prof. Sudarto, SH, Tembalang, Semarang.",
+      // Menggunakan Map untuk menghindari masalah escape karakter di string JSON
+      final Map<String, dynamic> jsonData = {
+        "tentang": "Lembaga Pendidikan ini didirikan atas dasar langkanya tenaga teknisi ahli madya yang diperlukan oleh industri dan keberhasilan Politeknik mekanik Swiss dan ITB, yang didirikan pada tahun 1976. Untuk itu tahun 1982 telah dioperasikan 6 buah Politeknik di USU Medan, UNSRI Palembang, UI Jakarta, ITB Bandung, UNDIP Semarang, dan UNIBRAW Malang dengan bantuan Bank Dunia sesuai dengan surat keputusan Direktorat Jenderal Pendidikan Tinggi Nomor 03/Dj/Kep/1979.\n\nPoliteknik Universitas Diponegoro pada awal mulanya (1982) mempunyai tiga departemen/jurusan bidang keteknikan, yaitu, Departemen/Jurusan Teknik Sipil, Departemen/Jurusan Teknik Mesin, dan Departemen /Jurusan Teknik Elektro. Tahun 1985 dibuka Jurusan Tata Niaga karena kebutuhan industri menuntut adanya tenaga terampil di bidang bisnis. Pada tahun 1989 terjadi pengembangan jurusan Elektro menjadi Jurusan Teknik Listrik dan Jurusan Teknik Elektronika/Telekomunikasi.\n\nBerdasarkan Surat Keputusan Menteri Pendidikan dan Kebudayaan RI No. : 313/O/1991 tanggal 6 Juni 1991 tentang Penataan Politeknik dalam lingkungan Universitas dan Institut Negeri maka pada tahun 1992 mempunyai 5 jurusan yaitu : Teknik Sipil, Teknik Mesin, Teknik Elektro, Akuntansi dan Administrasi Bisnis.\n\nPada tanggal 6 Agustus tahun 1997 Politeknik Universitas Diponegoro dinyatakan mandiri dan lepas dari manajemen Universitas Diponegoro dengan Surat Keputusan Menteri Pendidikan dan Kebudayaan RI Nomor : 175/O/1997 dengan nama POLITEKNIK NEGERI SEMARANG. Kemudian pada tanggal 31 Juli 2002 terbit surat keputusan Menteri Pendidikan Nasional nomor 134/O/2002 mengatur tentang Organisasi dan Tata Kerja Politeknik Negeri Semarang.",
         "visi": "Politeknik Negeri Semarang menjadi perguruan tinggi yang memajukan kemandirian teknologi dan bisnis bangsa Indonesia serta peradaban dunia.",
         "misi": {
           "1": "Towards quality education: Melaksanakan pendidikan tinggi bidang teknologi dan bisnis yang unggul, berkarakter dan berorientasi kewirausahaan.",
@@ -26,13 +23,11 @@ class TentangJurusanRepositoryImpl implements TentangJurusanRepository {
           "3": "Smart society: Mengembangkan budaya masyarakat cerdas berpengetahuan melalui pemasyarakatan techno-preneur dan kerjasama.",
           "4": "Good governance: Meningkatkan kualitas manajemen institusi melalui perbaikan berkelanjutan berdasarkan prinsip tata kelola yang baik."
         }
-      }
-      ''';
+      };
       
-      developer.log("Parsing JSON data");
+      developer.log("Creating model from JSON data");
       try {
-        final Map<String, dynamic> mockJson = jsonDecode(jsonString);
-        final result = TentangJurusanModel.fromJson(mockJson);
+        final result = TentangJurusanModel.fromJson(jsonData);
         developer.log("Successfully parsed tentang jurusan data");
         return result;
       } catch (parseError) {

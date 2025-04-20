@@ -12,6 +12,9 @@ class TentangContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Split the content into paragraphs based on \n
+    final paragraphs = content.split('\n');
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -38,14 +41,22 @@ class TentangContentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
-            content,
-            style: const TextStyle(
-              fontSize: 14,
-              height: 1.5,
-              color: Colors.black87,
-            ),
-          ),
+          // Display each paragraph with spacing between them
+          ...paragraphs.map((paragraph) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                paragraph,
+                style: const TextStyle(
+                  fontSize: 14,
+                  height: 1.5,
+                  color: Colors.black87,
+                ),
+                textAlign: TextAlign.justify,
+              ),
+              const SizedBox(height: 12), // Add space between paragraphs
+            ],
+          )).toList(),
         ],
       ),
     );
@@ -193,7 +204,7 @@ class MisiContentWidget extends StatelessWidget {
                               ),
                             ),
                             TextSpan(
-                              text: content,
+                              text: " " + content, // Menambahkan spasi di sini
                               style: const TextStyle(
                                 fontSize: 14,
                                 height: 1.5,
@@ -202,6 +213,7 @@ class MisiContentWidget extends StatelessWidget {
                             ),
                           ],
                         ),
+                        textAlign: TextAlign.justify, // Menambahkan justify alignment
                       ),
                     ),
                   ],
@@ -240,6 +252,7 @@ class MisiContentWidget extends StatelessWidget {
                           height: 1.5,
                           color: Colors.black87,
                         ),
+                        textAlign: TextAlign.justify, // Menambahkan justify alignment
                       ),
                     ),
                   ],
