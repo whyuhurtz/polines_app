@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:polines_app/features/home/domain/entities/news_entity.dart';
+import 'package:polines_app/features/home/presentation/screens/news_detail_screen.dart';
 
 class NewsWidget extends StatelessWidget {
   final News news;
@@ -110,7 +111,12 @@ class NewsWidget extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  // Navigate to news detail
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsDetailScreen(news: news),
+                    ),
+                  );
                 },
                 style: TextButton.styleFrom(
                   foregroundColor: polinesYellow,

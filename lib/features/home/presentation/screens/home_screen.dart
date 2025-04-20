@@ -31,9 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   
   // Banner image list
   final List<String> _bannerImages = [
-    'assets/images/splash_design1.png',
-    'assets/images/splash_design2.png',
-    'assets/images/splash_design3.png',
+    'assets/images/banner_home1.jpg',
+    'assets/images/banner_home2.jpg',
+    'assets/images/banner_home3.jpg',
   ];
 
   @override
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 8),
             const Text(
-              'Polines App',
+              'Comitted to Quality',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _buildCategoryButton(0, 'Berita'),
                   _buildCategoryButton(1, 'Jurusan'),
-                  _buildCategoryButton(2, 'Akses'),
+                  _buildCategoryButton(2, 'Akses Cepat'),
                 ],
               ),
             ),
@@ -338,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Rilis Berita (${_newsList.length})',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 20,
                   color: polinesBlue,
                 ),
               ),
@@ -403,7 +403,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Jurusan',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 20,
             color: polinesBlue,
           ),
         ),
@@ -500,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'Akses Cepat',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 20,
               color: polinesBlue,
             ),
           ),
