@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:polines_app/features/home/data/repositories/news_repository_impl.dart';
 import 'package:polines_app/features/home/domain/entities/news_entity.dart';
 import 'package:polines_app/features/home/presentation/screens/news_list_screen.dart';
+import 'package:polines_app/features/home/presentation/screens/semuajurusan_screen.dart';
 import 'package:polines_app/features/home/presentation/widgets/news_widget.dart';
 import 'package:polines_app/presentation/widgets/bottom_navbar.dart';
 
@@ -399,13 +400,45 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Jurusan',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: polinesBlue,
-          ),
+        // Jurusan header with "see all" link
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Jurusan',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: polinesBlue,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SemuaJurusanScreen(),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Text(
+                    'see all',
+                    style: TextStyle(
+                      color: Colors.blue[300],
+                      fontSize: 12,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         
@@ -414,25 +447,25 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          childAspectRatio: 1.0,
+          childAspectRatio: 0.85,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
           children: [
             _buildJurusanCard(
               'Administrasi Bisnis Terapan',
-              Icons.business_center,
-            ),
-            _buildJurusanCard(
-              'Teknik Elektro',
-              Icons.electrical_services,
-            ),
-            _buildJurusanCard(
-              'Teknik Sipil',
-              Icons.domain,
+              'assets/images/card_abt.jpg',
             ),
             _buildJurusanCard(
               'Akuntansi',
-              Icons.account_balance,
+              'assets/images/card_akutansi.jpg',
+            ),
+            _buildJurusanCard(
+              'Teknik Elektro',
+              'assets/images/card_elektro.jpg',
+            ),
+            _buildJurusanCard(
+              'Teknik Sipil',
+              'assets/images/card_sipil.jpg',
             ),
           ],
         ),
@@ -440,7 +473,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   
-  Widget _buildJurusanCard(String title, IconData icon) {
+  Widget _buildJurusanCard(String title, String imagePath) {
     return Container(
       decoration: BoxDecoration(
         color: polinesWhite,
@@ -456,35 +489,40 @@ class _HomeScreenState extends State<HomeScreen> {
       child: InkWell(
         onTap: () {},
         borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: polinesYellow.withOpacity(0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  icon,
-                  color: polinesBlue,
-                  size: 32,
+        child: Column(
+          children: [
+            // Image at top of card
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: polinesBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
