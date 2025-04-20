@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:polines_app/features/fasilitas/presentation/screens/fasilitas_screen.dart';
 import 'package:polines_app/features/home/presentation/screens/home_screen.dart';
+import 'package:polines_app/features/program-studi/presentation/screens/programstudi_screen.dart';
+import 'package:polines_app/features/tentang-jurusan/presentation/screens/tentangjurusan_screen.dart';
 import 'package:polines_app/presentation/screens/splash_screen.dart';
 
 void main() {
@@ -22,9 +25,9 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
-        // '/jurusan': (context) => const JurusanScreen(), 
-        // '/prodi': (context) => const ProdiScreen(),
-        // '/fasilitas': (context) => const FasilitasScreen(),
+        '/jurusan': (context) => const TentangJurusanScreen(),
+        '/prodi': (context) => const ProgramStudiScreen(),
+        '/fasilitas': (context) => const FasilitasScreen(),
       },
     );
   }

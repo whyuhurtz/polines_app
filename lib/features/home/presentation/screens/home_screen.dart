@@ -110,13 +110,16 @@ class _HomeScreenState extends State<HomeScreen> {
     
     // Handle navigation based on selected tab
     if (index != 0) {
-      // Temporarily show a snackbar for tabs that don't have screens yet
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${index == 1 ? 'Jurusan' : index == 2 ? 'Prodi' : 'Fasilitas'} screen coming soon!'),
-          duration: const Duration(seconds: 1),
-        ),
-      );
+      if (index == 1) {
+        // Navigate to Tentang Jurusan screen
+        Navigator.pushNamed(context, '/jurusan');
+      } else if (index == 2) {
+        // Navigate to Program Studi screen
+        Navigator.pushNamed(context, '/prodi');
+      } else if (index == 3) {
+        // Navigate to Fasilitas screen
+        Navigator.pushNamed(context, '/fasilitas');
+      }
     }
   }
 
