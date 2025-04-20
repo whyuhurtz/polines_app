@@ -20,52 +20,71 @@ class BottomNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
       decoration: BoxDecoration(
-        color: polinesWhite,
+        color: polinesYellow,
+        borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.15),
             blurRadius: 10,
-            offset: const Offset(0, -2),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
-          child: GNav(
-            backgroundColor: polinesWhite,
-            color: Colors.grey[600],
-            activeColor: polinesBlue,
-            tabBackgroundColor: polinesYellow.withOpacity(0.2),
-            gap: 8,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            selectedIndex: selectedIndex,
-            onTabChange: onTabChange,
-            tabs: [
-              GButton(
-                icon: Icons.home,
-                text: 'Beranda',
-                iconSize: 24,
-              ),
-              GButton(
-                icon: Icons.business,
-                text: 'Jurusan',
-                iconSize: 24,
-              ),
-              GButton(
-                icon: Icons.menu_book,
-                text: 'Prodi',
-                iconSize: 24,
-              ),
-              GButton(
-                icon: Icons.apps,
-                text: 'Fasilitas',
-                iconSize: 24,
-              ),
-            ],
+      child: GNav(
+        backgroundColor: Colors.transparent,
+        color: polinesBlue,
+        activeColor: polinesBlue,
+        tabBackgroundColor: Colors.white.withOpacity(0.3),
+        gap: 8,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        tabMargin: const EdgeInsets.symmetric(vertical: 2),
+        selectedIndex: selectedIndex,
+        onTabChange: onTabChange,
+        tabs: [
+          GButton(
+            icon: Icons.home,
+            text: 'Beranda',
+            iconSize: 24,
+            textStyle: const TextStyle(
+              color: polinesBlue,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
           ),
-        ),
+          GButton(
+            icon: Icons.business,
+            text: 'Jurusan',
+            iconSize: 24,
+            textStyle: const TextStyle(
+              color: polinesBlue,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+          GButton(
+            icon: Icons.menu_book,
+            text: 'Prodi',
+            iconSize: 24,
+            textStyle: const TextStyle(
+              color: polinesBlue,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+          GButton(
+            icon: Icons.apps,
+            text: 'Fasilitas',
+            iconSize: 24,
+            textStyle: const TextStyle(
+              color: polinesBlue,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }
