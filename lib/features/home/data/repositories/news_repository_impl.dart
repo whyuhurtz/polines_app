@@ -33,6 +33,13 @@ class NewsRepositoryImpl implements NewsRepository {
       "time_published": "05:27",
       "title": "PENYEMPURNAAN DOKUMEN AKREDITASI INTERNATIONAL 2024",
       "content": "MATERI WORKSHOP:\n\n1. Visi misi dan pengembangan keilmuan prodi\n\n2. Sumber daya manusia dosen\n\n3. Sarana dan prasarana\n\nWorkshop penyempurnaan dokumen akreditasi internasional ini diselenggarakan sebagai bagian dari persiapan Jurusan Administrasi Bisnis untuk menghadapi visitasi akreditasi internasional dari lembaga akreditasi ABEST21 yang akan dilaksanakan pada semester depan."
+    },
+    {
+      "author": "arifhatmojo",
+      "date_published": "Thu, 07/11/2024",
+      "time_published": "05:24",
+      "title": "Pemilihan Wirausaha Muda Pemula (WMP) Berprestasi Tingkat Nasional Tahun 2024 di raih oleh salah satu Dosen Jurusan Administrasi Bisnis",
+      "content": "Dalam rangka menumbuhkan semangat dan motivasi wirausaha di kalangan pemuda. Kementerian Pemuda dan Olahraga (Kemenpora) melalui Deputi Bidang Pengembangan Pemuda mengajak wiramuda di lingkungan Provinsi, Kabupaten, Kota, dan Perguruan Tinggi yang berpotensi untuk dapat mengikuti Apresiasi Wirausaha Muda Pemula (WMP) Berprestasi Tahun 2024. Salah satunya diraih oleh Dosen Jurusan Ardinistrasi Bisnis POLINES yaitu MISBAKHUL ARREZQI , S.E., M.M. meraih JUARA 2."
     }
   ];
 

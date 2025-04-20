@@ -23,6 +23,8 @@ class NewsDetailScreen extends StatelessWidget {
       return 'assets/images/berita3.png';
     } else if (news.title?.contains('PENYEMPURNAAN DOKUMEN') == true) {
       return 'assets/images/berita4.png';
+    } else if (news.title?.contains('WMP') == true) {
+      return 'assets/images/berita5.png';
     } else {
       // Default fallback image if no match
       return 'assets/images/berita1.png';
