@@ -6,6 +6,7 @@ import 'package:polines_app/features/home/presentation/screens/news_list_screen.
 import 'package:polines_app/features/home/presentation/screens/semuajurusan_screen.dart';
 import 'package:polines_app/features/home/presentation/widgets/news_widget.dart';
 import 'package:polines_app/presentation/widgets/bottom_navbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -534,30 +535,60 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Akses Cepat',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: polinesBlue,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Akses Cepat',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: polinesBlue,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           
-          // Grid of quick access items
+          // Grid of quick access items - 2x3 layout for better UI
           GridView.count(
-            crossAxisCount: 3,
+            crossAxisCount: 2,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
+            childAspectRatio: 1.4,
             children: [
-              _buildQuickAccessItem('Sistem Informasi\nAkademik', Icons.school),
-              _buildQuickAccessItem('Learning Without\nLimits', Icons.menu_book),
-              _buildQuickAccessItem('Pendaftaran\nMahasiswa Baru', Icons.app_registration),
-              _buildQuickAccessItem('Sistem Keuangan\nTerpadu Polines', Icons.account_balance_wallet),
-              _buildQuickAccessItem('Kuisioner Alumni\nJurusan', Icons.rate_review),
-              _buildQuickAccessItem('Career Development\nCenter', Icons.group),
+              _buildQuickAccessItem(
+                'Sistem Informasi Akademik', 
+                Icons.school,
+                'https://simadu.polines.ac.id/',
+              ),
+              _buildQuickAccessItem(
+                'E-Learning', 
+                Icons.menu_book,
+                'https://elnino.polines.ac.id/',
+              ),
+              _buildQuickAccessItem(
+                'Pendaftaran Mahasiswa Baru', 
+                Icons.app_registration,
+                'https://pmb.polines.ac.id/',
+              ),
+              _buildQuickAccessItem(
+                'Sistem Keuangan', 
+                Icons.account_balance_wallet,
+                'https://bakpk.polines.ac.id/',
+              ),
+              _buildQuickAccessItem(
+                'Kuisioner Alumni', 
+                Icons.rate_review,
+                'https://tracerstudy.polines.ac.id/',
+              ),
+              _buildQuickAccessItem(
+                'Career Development', 
+                Icons.group,
+                'https://tik.polines.ac.id/index.php/id/',
+              ),
             ],
           ),
           
@@ -567,37 +598,95 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   
-  Widget _buildQuickAccessItem(String title, IconData icon) {
+  Widget _buildQuickAccessItem(String title, IconData icon, String url) {
     return Container(
       decoration: BoxDecoration(
         color: polinesBlue,
         borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: polinesYellow,
-              size: 30,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 10,
-                height: 1.2,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _launchURL(url),
+          borderRadius: BorderRadius.circular(10),
+          splashColor: polinesYellow.withOpacity(0.3),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: polinesYellow,
+                size: 32,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
+                    height: 1.2,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+  
+  // Simplified URL launcher method optimized for web links
+  Future<void> _launchURL(String urlString) async {
+    try {
+      final Uri uri = Uri.parse(urlString);
+      
+      // Log the attempt
+      developer.log('Attempting to launch URL: $urlString');
+      
+      // Use platformDefault for better cross-platform support
+      await launchUrl(
+        uri,
+        mode: LaunchMode.platformDefault,
+      );
+      
+    } catch (e) {
+      developer.log('Error launching URL: $e', error: e);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Tidak dapat membuka link: $urlString'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+  
+  // Helper function to launch URLs
+  Future<void> launchUrlHelper(String url) async {
+    final Uri uri = Uri.parse(url);
+    try {
+      if (!await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      )) {
+        throw Exception('Could not launch $url');
+      }
+    } catch (e) {
+      throw 'Could not launch $url: $e';
+    }
   }
 }
