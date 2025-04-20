@@ -148,15 +148,8 @@ class NewsDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   
-                  // Content (preserving newlines)
-                  Text(
-                    news.content?.replaceAll('\\n', '\n') ?? 'No content available',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      height: 1.6,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  // Content with paragraphs and justify alignment
+                  ..._buildContentWithParagraphs(),
                 ],
               ),
             ),
@@ -166,5 +159,33 @@ class NewsDetailScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  // Helper method to build content with paragraphs
+  List<Widget> _buildContentWithParagraphs() {
+    // Get content text and handle null case
+    final String contentText = news.content ?? 'No content available';
+    
+    // Split the content into paragraphs based on \n
+    final List<String> paragraphs = contentText.split('\n');
+    
+    // Return a list of widgets for each paragraph with spacing between them
+    return paragraphs
+        .where((paragraph) => paragraph.trim().isNotEmpty) // Filter out empty paragraphs
+        .map((paragraph) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              paragraph.trim(),
+              style: const TextStyle(
+                fontSize: 15,
+                height: 1.6,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.justify,
+            ),
+            const SizedBox(height: 12), // Add space between paragraphs
+          ],
+        )).toList();
   }
 }
