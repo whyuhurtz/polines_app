@@ -20,7 +20,6 @@ class _NewsListScreenState extends State<NewsListScreen> {
   static const Color polinesBlue = Color(0xFF04428B);
   static const Color polinesYellow = Color(0xFFF6C31A);
   static const Color polinesLightBg = Color(0xFFF6F8FD);
-  static const Color polinesWhite = Color(0xFFFFFFFF);
 
   @override
   void initState() {
