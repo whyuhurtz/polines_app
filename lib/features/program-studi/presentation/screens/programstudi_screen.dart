@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:polines_app/features/tentang-jurusan/presentation/widgets/header_carousel_widget.dart';
+import 'package:polines_app/features/program-studi/presentation/widgets/content_tab_button.dart';
+import 'package:polines_app/features/program-studi/presentation/widgets/programstudi_content_widget.dart';
+import 'package:polines_app/features/program-studi/presentation/widgets/profil_content_widget.dart';
+import 'package:polines_app/features/program-studi/presentation/widgets/kompetensi_content_widget.dart';
 import 'package:polines_app/presentation/widgets/bottom_navbar.dart';
+
+enum ContentType { prodi, profil, kompetensi }
 
 class ProgramStudiScreen extends StatefulWidget {
   const ProgramStudiScreen({super.key});
@@ -12,11 +18,11 @@ class ProgramStudiScreen extends StatefulWidget {
 class _ProgramStudiScreenState extends State<ProgramStudiScreen> {
   // Colors based on Polines branding
   static const Color polinesBlue = Color(0xFF04428B);
-  static const Color polinesYellow = Color(0xFFF6C31A);
+  // static const Color polinesYellow = Color(0xFFF6C31A); // Used in the tab buttons
   static const Color polinesLightBg = Color(0xFFF6F8FD);
-  static const Color polinesWhite = Color(0xFFFFFFFF);
   
   int _selectedIndex = 2; // For bottom navbar, set to Prodi tab
+  ContentType _selectedContentType = ContentType.prodi; // Default tab
   
   // Handle navigation when bottom navbar tab is changed
   void _onTabChange(int index) {
@@ -60,7 +66,7 @@ class _ProgramStudiScreenState extends State<ProgramStudiScreen> {
               imagePaths: [
                 'assets/images/banner_prodi1.jpg',
                 'assets/images/banner_prodi2.jpg',
-                'assets/images/banner_home3.jpg',
+                'assets/images/banner_prodi3.jpg',
               ],
               height: 200,
             ),
@@ -70,24 +76,46 @@ class _ProgramStudiScreenState extends State<ProgramStudiScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(),
-                  const SizedBox(height: 16),
-                  _buildProdiCard(
-                    'Teknik Informatika',
-                    'Program studi yang mempelajari tentang pemrograman, jaringan, dan sistem informasi.',
-                    Icons.computer,
+                  // Tab Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ContentTabButton(
+                        text: 'Prodi',
+                        isSelected: _selectedContentType == ContentType.prodi,
+                        onPressed: () {
+                          setState(() {
+                            _selectedContentType = ContentType.prodi;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      ContentTabButton(
+                        text: 'Profil',
+                        isSelected: _selectedContentType == ContentType.profil,
+                        onPressed: () {
+                          setState(() {
+                            _selectedContentType = ContentType.profil;
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      ContentTabButton(
+                        text: 'Kompetensi',
+                        isSelected: _selectedContentType == ContentType.kompetensi,
+                        onPressed: () {
+                          setState(() {
+                            _selectedContentType = ContentType.kompetensi;
+                          });
+                        },
+                      ),
+                    ],
                   ),
-                  _buildProdiCard(
-                    'Teknik Elektronika',
-                    'Program studi yang berfokus pada rangkaian elektronik dan sistem digital.',
-                    Icons.memory,
-                  ),
-                  _buildProdiCard(
-                    'Akuntansi Perpajakan',
-                    'Program studi yang mempelajari tentang perpajakan dan keuangan.',
-                    Icons.calculate,
-                  ),
-                  const SizedBox(height: 30),
+                  
+                  const SizedBox(height: 24),
+                  
+                  // Dynamic content based on selected tab
+                  _buildSelectedContent(),
                 ],
               ),
             ),
@@ -100,103 +128,15 @@ class _ProgramStudiScreenState extends State<ProgramStudiScreen> {
       ),
     );
   }
-
-  Widget _buildHeader() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: polinesYellow,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Program Studi di Polines',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: polinesBlue,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Politeknik Negeri Semarang menawarkan berbagai program studi unggulan dengan fokus pada pendidikan vokasi yang siap kerja.',
-            style: TextStyle(
-              fontSize: 14,
-              color: polinesBlue.withOpacity(0.8),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProdiCard(String title, String description, IconData icon) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16.0),
-      decoration: BoxDecoration(
-        color: polinesWhite,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: InkWell(
-        onTap: () {
-          // Navigate to detailed prodi page
-        },
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: polinesBlue.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  icon,
-                  color: polinesBlue,
-                  size: 36,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: polinesBlue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  
+  Widget _buildSelectedContent() {
+    switch (_selectedContentType) {
+      case ContentType.prodi:
+        return const ProdiContentWidget();
+      case ContentType.profil:
+        return const ProfilContentWidget();
+      case ContentType.kompetensi:
+        return const KompetensiContentWidget();
+    }
   }
 }
