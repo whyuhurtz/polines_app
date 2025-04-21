@@ -104,6 +104,8 @@ class _TentangJurusanScreenState extends State<TentangJurusanScreen> {
                         'assets/images/banner_jurusan1.jpg',
                         'assets/images/banner_jurusan2.jpg',
                         'assets/images/banner_jurusan3.jpg',
+                        'assets/images/banner_jurusan4.jpg',
+                        'assets/images/banner_jurusan5.jpg'
                       ],
                       height: 200,
                     ),

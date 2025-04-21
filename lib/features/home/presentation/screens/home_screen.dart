@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             
             // Content based on selected tab
-            const SizedBox(height: 16),
+            const SizedBox(height: 16), // Reduced from 24 to make spacing more compact
             _buildSelectedTabContent(),
           ],
         ),
@@ -376,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        
+
         // News List
         ...List.generate(
           _newsList.length,
@@ -389,14 +389,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   
   Widget _buildJurusanContent() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          _buildJurusanSection(),
-          const SizedBox(height: 30),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: _buildJurusanSection(),
+        ),
+        const SizedBox(height: 30),
+      ],
     );
   }
   
@@ -444,7 +445,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        const SizedBox(height: 16),
         
         // Jurusan cards - grid layout
         GridView.count(
@@ -533,12 +533,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   
   Widget _buildQuickAccessContent() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -551,10 +552,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          
-          // Grid of quick access items - 2x3 layout for better UI
-          GridView.count(
+        ),
+        const SizedBox(height: 10), // Gap between title and grid contents.
+        
+        // Grid of quick access items - 2x3 layout for better UI
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: GridView.count(
             crossAxisCount: 2,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -594,10 +598,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          
-          const SizedBox(height: 30),
-        ],
-      ),
+        ),
+        
+        const SizedBox(height: 30),
+      ],
     );
   }
   
