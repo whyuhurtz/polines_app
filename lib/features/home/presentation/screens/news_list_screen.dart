@@ -100,12 +100,57 @@ class _NewsListScreenState extends State<NewsListScreen> {
       );
     }
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(8.0),
-      itemCount: _newsList.length,
-      itemBuilder: (context, index) {
-        return NewsWidget(news: _newsList[index]);
-      },
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 16),
+            ...List.generate(
+              _newsList.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: NewsWidget(news: _newsList[index]),
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: polinesYellow,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Berita Polines',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: polinesBlue,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Dapatkan informasi terbaru mengenai kegiatan dan prestasi civitas akademika Politeknik Negeri Semarang.',
+            style: TextStyle(
+              fontSize: 14,
+              color: polinesBlue.withOpacity(0.8),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

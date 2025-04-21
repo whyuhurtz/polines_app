@@ -378,9 +378,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
         // News List
-        ...List.generate(
-          _newsList.length,
-          (index) => NewsWidget(news: _newsList[index]),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: List.generate(
+              _newsList.length,
+              (index) => NewsWidget(news: _newsList[index]),
+            ),
+          ),
         ),
         
         const SizedBox(height: 30),
@@ -451,24 +456,23 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          childAspectRatio: 0.85,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
           children: [
             _buildJurusanCard(
-              'Administrasi Bisnis Terapan',
+              'Jurusan Administrasi Bisnis Terapan',
               'assets/images/card_abt.jpg',
             ),
             _buildJurusanCard(
-              'Akuntansi',
+              'Jurusan Akuntansi',
               'assets/images/card_akutansi.jpg',
             ),
             _buildJurusanCard(
-              'Teknik Elektro',
+              'Jurusan Teknik Elektro',
               'assets/images/card_elektro.jpg',
             ),
             _buildJurusanCard(
-              'Teknik Sipil',
+              'Jurusan Teknik Sipil',
               'assets/images/card_sipil.jpg',
             ),
           ],
@@ -480,7 +484,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildJurusanCard(String title, String imagePath) {
     return Container(
       decoration: BoxDecoration(
-        color: polinesWhite,
+        color: polinesBlue,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -495,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(12),
         child: Column(
           children: [
-            // Image at top of card
+            // Image at top of card - increased height
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
@@ -504,20 +508,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Image.asset(
                 imagePath,
                 width: double.infinity,
-                height: 120,
+                height: 125, // Increased from 110 to 125 for more height
                 fit: BoxFit.cover,
               ),
             ),
+            // Text container with center alignment
             Expanded(
-              child: Center(
+              child: Center( // Added Center widget to ensure perfect centering
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                   child: Text(
                     title,
-                    style: TextStyle(
-                      color: polinesBlue,
+                    style: const TextStyle(
+                      color: polinesWhite,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 13,
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 2,

@@ -89,7 +89,7 @@ class SemuaJurusanScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16.0),
       decoration: BoxDecoration(
-        color: polinesWhite,
+        color: polinesBlue, // Changed from polinesWhite to polinesBlue
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -116,30 +116,32 @@ class SemuaJurusanScreen extends StatelessWidget {
               child: Image.asset(
                 imagePath,
                 width: double.infinity,
-                height: 150,
+                height: 120, // Reduced from 150 to make card more compact
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(12.0), // Reduced from 16.0 to make more compact
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      color: polinesBlue,
+                    style: const TextStyle(
+                      color: polinesWhite, // Changed text color to white for contrast
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 4), // Reduced from 8 to make more compact
                   Text(
                     description,
                     style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
+                      fontSize: 13, // Reduced from 14 for better fit
+                      color: Colors.white.withOpacity(0.85), // Changed text color for contrast
                     ),
+                    maxLines: 2, // Limit to 2 lines to make card more compact
+                    overflow: TextOverflow.ellipsis, // Add ellipsis if text overflows
                   ),
                 ],
               ),
