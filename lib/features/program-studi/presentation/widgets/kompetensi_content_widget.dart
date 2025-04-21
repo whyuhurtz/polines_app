@@ -95,8 +95,10 @@ class _KompetensiContentWidgetState extends State<KompetensiContentWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Section title and "see all" button in same row
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               'Kompetensi Lulusan',
@@ -115,7 +117,13 @@ class _KompetensiContentWidgetState extends State<KompetensiContentWidget> {
                   ),
                 );
               },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: const Size(0, 0),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     'see all',
@@ -134,7 +142,9 @@ class _KompetensiContentWidgetState extends State<KompetensiContentWidget> {
             ),
           ],
         ),
-        const SizedBox(height: 16),
+        
+        // Reduced gap between header and list (from 16+8 to just 12)
+        const SizedBox(height: 12),
         
         // List kompetensi with redesigned cards
         ...List.generate(displayItems.length, (index) {
